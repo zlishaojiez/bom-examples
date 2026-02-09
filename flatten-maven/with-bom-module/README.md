@@ -2,7 +2,7 @@
 
 BOM (Bill of Materials) with Maven Aggregator Project examples.
 
-All Maven submodules inherit their version from the parent project.
+All Maven submodules inherit their version from the parent project.  
 The flatten-maven-plugin manages and maintains these versions.
 
 There's a bom module maintains the BOM.
@@ -11,7 +11,7 @@ You shouldn't use the example directly, just reference it to do yourself project
 
 ## simple-style (Flat Hierarchy)
 
-In this style, all relevant Maven modules are listed directly under the parent project.
+In this style, all relevant Maven modules are listed directly under the parent project.  
 This structure is straightforward and suitable for projects with a smaller number of modules or when modules have a relatively flat relationship without strong thematic groupings.
 
 ```text
@@ -23,7 +23,8 @@ Project
 
 ## spring-boot-style (Grouped Hierarchy)
 
-In this style, Maven modules are organized into logical subdirectories (folders), often grouped by feature, layer (e.g., API, core, data), or component.
+In this style, Maven modules are organized into logical subdirectories (folders), often grouped by feature, layer (e.g., API, core, data)
+, or component.  
 This approach enhances clarity and manageability for larger, more complex projects by grouping related modules together, similar to how the Spring Boot project itself is structured.
 
 ```text
@@ -40,7 +41,8 @@ Project
 
 ## Version Management and Update
 
-The project's version is managed consistently across the parent and all submodules using the flatten-maven-plugin. This ensures that all modules share the same version, which is derived from the parent project's POM.
+The project's version is managed consistently across the parent and all submodules using the flatten-maven-plugin. This ensures that all 
+modules share the same version, which is derived from the parent project's POM.  
 To update the project version during the build lifecycle (e.g., install or deploy), you can use the following approach:
 
 ```bash
@@ -51,7 +53,7 @@ mvn clean install -Drevision=<NEW_VERSION>
 mvn clean deploy -Drevision=<NEW_VERSION>
 ```
 
-Here, <NEW_VERSION> represents the desired new version string (e.g., 1.2.3, 2.0.0-SNAPSHOT).
+Here, <NEW_VERSION> represents the desired new version string (e.g., 1.2.3, 2.0.0-SNAPSHOT).  
 This version string can be generated dynamically by your CI/CD pipeline (such as Jenkins, GitHub Actions, or GitLab CI/CD) based on release strategies, tags, or other logic, or it can be provided manually as part of the build command.
 
 ## Usage
