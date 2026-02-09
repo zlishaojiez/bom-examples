@@ -3,7 +3,7 @@
 
     <groupId>io.github.zlishaojiez</groupId>
     <artifactId>project-bom</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>project-bom</name>
@@ -34,12 +34,12 @@
             <dependency>
                 <groupId>io.github.zlishaojiez</groupId>
                 <artifactId>module-a</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>io.github.zlishaojiez</groupId>
                 <artifactId>module-b</artifactId>
-                <version>1.0.0</version>
+                <version>1.0.1-SNAPSHOT</version>
             </dependency>
 
             <!-- Other dependencies used by project modules. Add the actual dependencies of your project here-->

@@ -4,7 +4,7 @@
     <parent>
         <groupId>io.github.zlishaojiez</groupId>
         <artifactId>project-bom</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
         <relativePath>project-bom/pom.xml</relativePath>
     </parent>
 
@@ -15,7 +15,7 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/zlishaojiez/bom-examples.git</developerConnection>
-      <tag>1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
