@@ -1,0 +1,103 @@
+# bom-examples
+
+BOM (Bill of Materials) with Maven Aggregator Project examples.
+
+All Maven submodules inherit their version from the parent project.
+The flatten-maven-plugin manages and maintains these versions.
+
+There's a bom module maintains the BOM.
+
+You shouldn't use the example directly, just reference it to do yourself project.
+
+## simple-style (Flat Hierarchy)
+
+In this style, all relevant Maven modules are listed directly under the parent project.
+This structure is straightforward and suitable for projects with a smaller number of modules or when modules have a relatively flat relationship without strong thematic groupings.
+
+```text
+Project
+|-- Project-Bom
+|-- module A (Maven Submodule)
+|-- module B (Maven Submodule)
+```
+
+## spring-boot-style (Grouped Hierarchy)
+
+In this style, Maven modules are organized into logical subdirectories (folders), often grouped by feature, layer (e.g., API, core, data), or component.
+This approach enhances clarity and manageability for larger, more complex projects by grouping related modules together, similar to how the Spring Boot project itself is structured.
+
+```text
+Project
+|-- bom (Logical Grouping Folder)
+    |-- Project-Bom
+|-- feature1 (Logical Grouping Folder)
+    |-- module A (Maven Submodule)
+|-- feature2 (Logical Grouping Folder)
+    |-- module B (Maven Submodule)
+```
+
+(Note: The "Folders" like feature1, feature2 are primarily organizational directories in the filesystem and do not correspond to Maven modules themselves.)
+
+## Version Management and Update
+
+The project's version is managed consistently across the parent and all submodules using the flatten-maven-plugin. This ensures that all modules share the same version, which is derived from the parent project's POM.
+To update the project version during the build lifecycle (e.g., install or deploy), you can use the following approach:
+
+```bash
+mvn clean install -Drevision=<NEW_VERSION>
+
+# Or for deploy
+
+mvn clean deploy -Drevision=<NEW_VERSION>
+```
+
+Here, <NEW_VERSION> represents the desired new version string (e.g., 1.2.3, 2.0.0-SNAPSHOT).
+This version string can be generated dynamically by your CI/CD pipeline (such as Jenkins, GitHub Actions, or GitLab CI/CD) based on release strategies, tags, or other logic, or it can be provided manually as part of the build command.
+
+## Usage
+
+You should use the Project-Bom as parent, shouldn't use the Project  
+
+e.x.
+
+```xml
+    <parent>        
+        <groupId>io.github.zlishaojiez</groupId>
+        <artifactId>project-bom</artifactId>
+        <!-- The version of the artifact-->
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.company</groupId>
+    <artifactId>service</artifactId>    
+    <version>1.0.0-SNAPSHOT</version>
+
+```
+
+or import it in DependencyManagement when the service project need another parent
+
+```xml
+
+    <parent>        
+        <groupId>com.other</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.company</groupId>
+    <artifactId>service</artifactId>    
+    <version>1.0.0-SNAPSHOT</version>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.github.zlishaojiez</groupId>
+                <artifactId>project-bom</artifactId>
+                <!-- The version of the artifact-->
+                <version>1.0.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope> 
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```
