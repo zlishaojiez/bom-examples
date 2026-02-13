@@ -193,5 +193,11 @@
             <url>https://central.sonatype.com/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://central.sonatype.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

@@ -179,6 +179,29 @@
         </pluginManagement>
 
         <plugins>
+            <!-- The maven-antrun-plugin is used to remove the <relativePath> element from the submodules' flattened POM parent, which is
+            not needed for a POM. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>remove-relativePath</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replaceregexp file="${project.basedir}/.flattened-pom.xml"
+                                               match="\s*&lt;relativePath&gt;[^&lt;]*&lt;/relativePath&gt;"
+                                               replace="" flags="g"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <!-- The flatten-maven-plugin is used to generate a flattened POM for the BOM module, which can be deployed to a Maven repository. -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -186,12 +209,11 @@
                 <version>1.7.3</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <flattenMode>bom</flattenMode>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
                     <pomElements>
                         <!-- Keep the elements that are necessary for a BOM POM. -->
+                        <build>remove</build>
                         <pluginManagement>keep</pluginManagement>
-                        <repositories>keep</repositories>
-                        <distributionManagement>keep</distributionManagement>
                     </pomElements>
                 </configuration>
                 <executions>
@@ -231,5 +253,11 @@
             <url>https://central.sonatype.com/</url>
         </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://central.sonatype.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
