@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.zlishaojiez</groupId>
-        <artifactId>project</artifactId>
+        <artifactId>project-bom</artifactId>
         <version>${revision}</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../../bom/project-bom</relativePath>
     </parent>
 
     <artifactId>module-a</artifactId>
